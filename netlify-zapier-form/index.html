@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+      html {
+        font-family: Georgia;
+      }
+      body {
+        margin: auto;
+        margin-top: 4em;
+        width: 500px;
+        font-size: 1em;
+        height: 100vh;
+      }
+      h1 {
+        margin: 0;
+        margin-bottom: 1em;
+        text-align: center;
+      }
+      form {
+        display: grid;
+        gap: 10px;
+      }
+      section {
+        display: grid;
+      }
+      section input[type="text"], input[type="email"] {
+        font-size: 1em;
+        padding: 8px 5px;
+      }
+      section input[type="checkbox"] {
+        width: 1em;
+      }
+      label {
+        margin-bottom: 5px;
+        font-size: 1.2em;
+      }
+      .grid-50-50 {
+        grid-template-columns: 1fr 1fr;
+      }
+      textarea {
+        height: 150px;
+        font-size: 1em;
+        padding: 5px;
+        font-family: Georgia, 'Times New Roman', Times, serif
+      }
+      button {
+        width: 150px;
+        justify-self: center;
+        color: white;
+        background-color: red;
+        border-radius: 5px;
+        padding: 12px 8px;
+        border-color: red;
+        font-size: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>peterkins.dev Topic Form</h1>
+    <form name="peterkins-dev-topic-submission" netlify>
+      <section>
+        <label>Name</label>
+        <input type="text" name="name"/>
+      </section>
+      <section>
+        <label>Email</label>
+        <input type="email" name="email"/>
+      </section>
+      <label>Topics You're Interested In</label>
+      <section class="grid-50-50">
+        <section>
+          <label>Frontend</label>
+          <input type="checkbox" value="Frontend" name="frontend"/>
+          <label>Backend</label>
+          <input type="checkbox" value="Backend" name="backend"/>
+          <label>Mobile</label>
+          <input type="checkbox" value="Mobile" name="mobile"/>
+        </section>
+        <section>
+          <label>AI/ML</label>
+          <input type="checkbox" value="AI/ML" name="ai-ml"/>
+          <label>Systems</label>
+          <input type="checkbox" value="Systems" name="systems"/>
+          <label>Embedded</label>
+          <input type="checkbox" value="Embedded" name="embedded"/>
+        </section>
+      </section>
+      <section>
+        <label>Other (if not listed)</label>
+        <input type="text" name="other-topic"/>
+      </section>
+      <section>
+        <label>Additional Feedback</label>
+        <textarea maxlength="1000" name="comment"></textarea>
+      </section>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
