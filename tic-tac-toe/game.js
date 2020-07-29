@@ -13,6 +13,17 @@ const game_board_elem = document.getElementById('game-board');
 
 var cells = document.getElementsByClassName('game-board-cell');
 
+var modal = document.getElementById('winner-modal');
+
+var close_button = document.querySelector(".close-button");
+
+var game_completed = false;
+
+
+function toggleModal() {
+  modal.classList.toggle("show-modal");
+}
+
 // boolean
 function hasWonGame(game_board, player) {
   var char = '';
@@ -58,31 +69,55 @@ for (var i = 0; i < cells.length; i++) {
 
     var [row, column] = this.id.split('-');
 
-    if (player_turn == PLAYER_1) {
-      let p = document.createElement("p");
-      p.innerHTML = "X";
-      this.appendChild(p);
+    if (player_turn == PLAYER_1 && game_completed == false) {
+      var x = document.createElement("IMG");
+      x.setAttribute("src", "x.jpg");
+      x.setAttribute("width", "190");
+      x.setAttribute("height", "190");
+      this.appendChild(x);
 
       game_board[row][column] = 'X';
 
       if (hasWonGame(game_board, player_turn)) {
+        game_completed = true;
         setTimeout(function() {
-          alert(`${player_turn} has won the game!`);
+          toggleModal();
+          $('.container').fireworks();
+          document.getElementById("winner-text").innerHTML = 'Player 1 has won!';
         }, 100)
       }
 
       player_turn = PLAYER_2;
     } else {
-      this.innerHTML = `<p>O</p>`;
-      game_board[row][column] = 'O';
+      if(game_completed == false) {
+        var x = document.createElement("IMG");
+        x.setAttribute("src", "o.jpg");
+        x.setAttribute("width", "190");
+        x.setAttribute("height", "190");
+        this.appendChild(x);
+        game_board[row][column] = 'O';
 
-      if (hasWonGame(game_board, player_turn)) {
-        setTimeout(function() {
-          alert(`${player_turn} has won the game!`);
-        }, 100)
+        if (hasWonGame(game_board, player_turn)) {
+          game_completed = true;
+          setTimeout(function() {
+            toggleModal();
+            $('.container').fireworks();
+            document.getElementById("winner-text").innerHTML = 'Player 2 has won!';
+          }, 100)
+        }
+
+        player_turn = PLAYER_1;
       }
-
-      player_turn = PLAYER_1;
     }
   })
 }
+
+function windowOnClick(event) {
+  if (event.target == modal) {
+    toggleModal();
+  }
+}
+
+close_button.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+
